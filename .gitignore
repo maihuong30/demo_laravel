@@ -1,0 +1,13 @@
+/node_modules
+/public/storage
+/storage/*.key
+/.idea
+Homestead.json
+Homestead.yaml
+.env
+*.DS_Store
+/vendor
+.DS_Store
+thumbs.db
+Thumbs.db
+desktop.ini
