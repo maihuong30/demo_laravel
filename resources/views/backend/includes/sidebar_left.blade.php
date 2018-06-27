@@ -30,19 +30,19 @@
                     <li> <a href="dashboard-3.html">Thêm mới</a></li>
                 </ul>
             </li>
-
+            <!--khach hang-->
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" data-target="#customer-list">
                     <i class="vl_slider-h-range"></i>
                     <span class="nav-link-text">Quản lý khách hàng</span>
                 </a>
                 <ul class="sidenav-second-level collapse" id="customer-list" data-parent="#accordion">
-                    <li> <a href="alert.html">Danh sách </a> </li>
-                    <li> <a href="buttons.html">Thêm mới </a></li>
+                    <li> <a href="<?php echo \URL::route('customer.index') ?>">Danh sách </a> </li>
+                    <li> <a href="<?php echo \URL::route('customer.add') ?>">Thêm mới </a></li>
 
                 </ul>
             </li>
-
+            <!--./khach hang-->
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
                 <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" data-target="#project">
                     <i class="vl_slider-h-range"></i>

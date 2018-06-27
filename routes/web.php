@@ -20,4 +20,32 @@ Route::group(array('prefix' => '/', 'middleware' => 'auth'), function () {
     // Manager Admin
     Route::match(['get', 'post'], LINK_BACKEND . '/users', array('as'=>'users.index', 'uses'=>'Backend\UsersController@index'));
     Route::match(['get', 'post'], LINK_BACKEND . '/users/edit/{id}', ['as' => 'users.edit', 'uses' => 'UserController@edit']);
+
+
+   //Manager Customer
+    Route::match(['get', 'post'], LINK_BACKEND . '/customer', array('as'=>'customer.index', 'uses'=>'Backend\CustomerController@index'));
+
+    // Route::match(['get', 'post'], LINK_BACKEND . '/edit_cus', array('as'=>'customer.edit', 'uses'=>'Backend\CustomerController@edit'));
+
+   
+
+   //create Customer
+    Route::match(['get', 'post'], LINK_BACKEND . '/add_cus', array('as'=>'customer.add', 'uses'=>'Backend\CustomerController@create'));
+
+    Route::match(['get', 'post'], LINK_BACKEND . '/post.customer', array('as'=>'post.customer', 'uses'=>'Backend\CustomerController@store'));
+   
+
+   //edit Customer
+    Route::match(['get', 'post'], LINK_BACKEND . '/edit.customer/{id}', array('as'=>'edit.customer', 'uses'=>'Backend\CustomerController@edit'));
+  
+    Route::match(['get', 'post'], LINK_BACKEND . '/customer/edit/post/{id}', array('as'=>'post', 'uses'=>'Backend\CustomerController@update'));
+   // delete Customer
+   
+    Route::match(['get', 'post'], LINK_BACKEND . '/customer/delete/{id}', array('as'=>'customer/delete', 'uses'=>'Backend\CustomerController@destroy'));
+  //show Customer
+  Route::match(['get', 'post'], LINK_BACKEND . '/customer/show/{id}', array('as'=>'show.customer', 'uses'=>'Backend\CustomerController@show'));
+  //upload file
+
+  Route::post('/file{id}','Filecontroller@doUpload');
+
 });

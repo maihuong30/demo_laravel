@@ -31,7 +31,7 @@ class UsersController extends Controller
             }
         }
         $user = $user->orderBy('updated_at', 'desc');
-        $users = $user->paginate(ITEM_IN_PAGE);
+        $users = $user->paginate(ITEM_IN_PAGE);// phan trang
 
         return view('backend.users.index', [
             "users" => $users,
