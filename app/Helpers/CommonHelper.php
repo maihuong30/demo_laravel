@@ -34,4 +34,14 @@ class CommonHelper
 
         return $filters;
     }
+
+    public static function upload($files, $oid, $path, $type, $save = false) {
+        // Xu ly upload file len server
+        
+
+        // Xu ly luu vao DB
+        if (!empty($save)) {
+            // Luu vao DB
+        }
+    }
 }

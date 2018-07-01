@@ -69,7 +69,10 @@ class CustomerController extends Controller
     public function show($id)
     {
        $customer=App\Customer::where('id',$id)->get();
-       return view('backend.customer.show',['customer'=>$customer]);
+       $files=DB::table('file')->where('id_other',$id)->where('type',2)->where('status',FILE_ACTIVE)->get();
+   
+       return view('backend.customer.show',['customer'=>$customer,'files'=>$files,'id'=>$id]);
+       
     }
     
     /**

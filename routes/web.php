@@ -46,6 +46,16 @@ Route::group(array('prefix' => '/', 'middleware' => 'auth'), function () {
   Route::match(['get', 'post'], LINK_BACKEND . '/customer/show/{id}', array('as'=>'show.customer', 'uses'=>'Backend\CustomerController@show'));
   //upload file
 
-  Route::post('/file{id}','Filecontroller@doUpload');
+  Route::match(['get', 'post'], LINK_BACKEND . '/file/upload/{id}/{id_other}/{type}', array('as'=>'file/upload', 'uses'=>'Backend\FileController@upload'));
+ 
 
+  Route::get('/file/customer/{path}', ['as'=>'file/show']);
+
+  Route::match(['get', 'post'], LINK_BACKEND . '/file/delete/{id}/{id_other}', array('as'=>'file/delete', 'uses'=>'Backend\FileController@delete'));
+
+  Route::match(['get', 'post'], LINK_BACKEND . '/file/edit/{id}', array('as'=>'file/edit', 'uses'=>'Backend\FileController@edit'));
+
+
+Route::match(['get', 'post'], LINK_BACKEND . '/file/update/{id}/{id_other}', array('as'=>'file/update', 'uses'=>'Backend\FileController@update'));
+ 
 });

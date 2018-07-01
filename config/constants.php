@@ -17,3 +17,16 @@ define("PAGINATION_LIMIT", 2);
 // define user customer
 define("CUSTOMER_INACTIVE", -1);
 define("CUSTOMER_ACTIVE", 1);
+
+define('FILE_TYPE_PROJECT', 1);
+define('FILE_TYPE_CUSTOMER', 2);
+
+
+define('FILE_ACTIVE',1);
+define('FILE_INACTIVE',-1);
+
+
+
+// define('FILE_LINK', '/');
+
+

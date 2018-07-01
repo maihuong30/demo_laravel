@@ -1,148 +1,97 @@
--- phpMyAdmin SQL Dump
--- version 4.7.7
--- https://www.phpmyadmin.net/
---
--- Host: localhost:3306
--- Generation Time: Jun 14, 2018 at 05:42 PM
--- Server version: 5.6.38
--- PHP Version: 5.6.32
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
---
--- Database: `tms_mobileplus`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `cost`
---
-
-CREATE TABLE `cost` (
-  `id` int(11) NOT NULL,
-  `id_project` int(11) NOT NULL,
-  `cost_detail` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `cost` int(11) NOT NULL,
-  `status` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `customer`
---
-
-CREATE TABLE `customer` (
-  `id` int(11) NOT NULL,
-  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `phone` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `address` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `status` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `project`
---
-
-CREATE TABLE `project` (
-  `id` int(11) NOT NULL,
-  `id_cus` int(11) NOT NULL,
-  `name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `start_time` date NOT NULL,
-  `end_time` date NOT NULL,
-  `price` int(11) NOT NULL,
-  `status` int(2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `username` varchar(64) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `fullname` varchar(255) NOT NULL,
-  `remember_token` varchar(100) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `email`, `username`, `password`, `fullname`, `remember_token`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'quyet@webviet.vn', 'quyetnx', '$2y$10$K8uLxCXcK2JXljjsLvl7p.Vry/Yg3OBS5uqXK/KG3sENAHQI1wMte', 'Nguyễn Xuân Quyết', 'uWY0nqNrulfq3gnKNf5rLzTpnu4TuhTRREGoF0VWvrX2S64zCIa7LtBYPbiq', 1, '2018-05-25 10:00:00', '2018-05-25 10:00:00'),
-(2, 'admin', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Admin', 'awqweqw', 1, NULL, NULL);
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `cost`
---
-ALTER TABLE `cost`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `customer`
---
-ALTER TABLE `customer`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `project`
---
-ALTER TABLE `project`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id_guest` (`id_cus`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `customer`
---
-ALTER TABLE `customer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `project`
---
-ALTER TABLE `project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `project`
---
-ALTER TABLE `project`
-  ADD CONSTRAINT `project_ibfk_1` FOREIGN KEY (`id_cus`) REFERENCES `customer` (`id`);
+ -- https://www.phpmyadmin.net/
+ --
+ -- Máy chủ: localhost:3306
+--- Thời gian đã tạo: Th6 27, 2018 lúc 10:30 AM
++-- Thời gian đã tạo: Th6 27, 2018 lúc 02:16 PM
+ -- Phiên bản máy phục vụ: 5.6.38
+ -- Phiên bản PHP: 5.6.32
+ 
+ (28, 17, 'asdsadasd', 1000000, 1),
+ (29, 17, 'asdasdsad', 111111, 1),
+ (30, 17, 'tung lam lam lam', 1111111, 1),
+-(31, 13, 'asdasdasd', 1000000, 1);
++(31, 13, 'asdasdasd', 1000000, 1),
++(32, 3, 'TTTTTTTB', 1000000, 1),
++(33, 10, 'lmamnbgga\r\nsakjdajksdkjlasd', 1000000, -1);
+ 
+ -- --------------------------------------------------------
+ 
+ --
+ 
+ INSERT INTO `customer` (`id`, `name`, `email`, `phone`, `address`, `status`) VALUES
+-(1, 'nguyen tung lam', 'lambaei6@gmail.com', '0948795490', 'jsjjsjsjsjsjsjsjs', 1),
+-(2, 'Nguyen Xuan Quyet', 'quyetnx@mobileplus.vn', '0906018345', 'Bac Ninh', 1);
++(1, 'nguyen tung lam', 'lambaei6@gmail.com', '0948795490', 'jsjjsjsjsjsjsjsjs', 0),
++(2, 'Nguyen Xuan Quyett', 'quyetnx@mobileplus.vn', '0906018345', 'Bac Ninh - Lim', 1),
++(3, 'lam', 'supremedreams96@gmail.com', '0915240896', 'gam cau`', 1);
++
++-- --------------------------------------------------------
++
++--
++-- Cấu trúc bảng cho bảng `file`
++--
++
++CREATE TABLE `file` (
++  `id` int(11) NOT NULL,
++  `o_id` int(11) NOT NULL,
++  `type` int(11) NOT NULL,
++  `file` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
++  `status` int(2) NOT NULL
++) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+ 
+ -- --------------------------------------------------------
+ 
+ (6, 1, 'asdasdasd', 'asfasf', '2018-06-11', '2018-06-05', 1000000, -1),
+ (8, 1, 'nguyen tung lam', 'sadasdsdasdasd', '2018-06-04', '2018-06-13', 1000000, -1),
+ (10, 2, 'nguyen tung lam', 'sadjjsdjkfajksdfjkasdjkfasdf\r\nasdfl;\r\n\r\nasdl;fkla;sdfk;lasdkflaskld;\r\njkldsajkdsjgksdjklgjaskldjads\r\njaklsdgkjasdgjkasdjkgjaksdgjkasdgjklasdjg\r\njklasdgkjasdgjkasdjkgjasdgjasdgkjasdkjgasdg\r\naksjdlkjalsdjkasdgjkasdgkjasdkjgasdg\r\nkljasdgkjlasdgkjdsjkgsakjdgjkasdgjkasdg\r\n\r\nlam\r\nlaml\r\nlamm', '2018-06-18', '2018-06-29', 1000000, 1),
+-(11, 1, '123qwd', 'qweqwe\r\nqwe\r\nqwe', '2018-06-20', '2018-06-29', 1111, 1),
++(11, 1, '123qwd', 'qweqwe\r\nqwe\r\nqwe', '2018-06-20', '2018-06-29', 1111, -1),
+ (12, 1, '123qwd', 'qweqwe\r\nqwe\r\nqwe', '2018-06-20', '2018-06-29', 1111, -1),
+-(13, 1, '123123213', '123123213', '2018-06-04', '2018-06-28', 121221, 1),
++(13, 1, 'lam lam lam lam', '123123213', '2018-06-04', '2018-06-28', 121221, -1),
+ (14, 1, 'nguyen tung lam', '123\r\n123\r\n123', '2018-06-14', '2018-06-12', 100000, 1),
+ (15, 1, 'nguyen tung lam', '12212121', '2018-05-29', '2018-06-14', 1000000, 1),
+ (16, 1, 'nguyen tung lam', 'sasasa', '2018-06-04', '2018-06-06', 1000000, 1),
+-(17, 1, 'nguyen thanh duy', 'fgffggf', '2018-06-04', '2018-06-12', 1000000, 1);
++(17, 1, 'nguyen thanh duy', 'fgffggf', '2018-06-04', '2018-06-12', 1000000, 1),
++(18, 1, 'nguyen tung lam', 'sgsggsgssgsg', '2018-06-03', '2018-06-21', 1000000, 1),
++(19, 1, 'nguyen tung lam duy', 'sdsssssssssdsD', '2018-06-04', '2018-06-28', 1000000, 1),
++(20, 1, 'nguyen tung sss', 'eeeeeeeeeeeeee', '2018-06-04', '2018-06-30', 1000000, -1),
++(21, 1, 'tms_mobileplus', 'qweasfwrhqweqg', '2018-06-11', '2018-06-29', 1000000, -1);
+ 
+ -- --------------------------------------------------------
+ 
+   ADD PRIMARY KEY (`id`);
+ 
+ --
++-- Chỉ mục cho bảng `file`
++--
++ALTER TABLE `file`
++  ADD PRIMARY KEY (`id`);
++
++--
+ -- Chỉ mục cho bảng `project`
+ --
+ ALTER TABLE `project`
+ -- AUTO_INCREMENT cho bảng `cost`
+ --
+ ALTER TABLE `cost`
+-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
++  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+ 
+ --
+ -- AUTO_INCREMENT cho bảng `customer`
+ --
+ ALTER TABLE `customer`
+-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
++  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ 
+ --
+ -- AUTO_INCREMENT cho bảng `project`
+ --
+ ALTER TABLE `project`
+-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
++  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+ 
+ --
+ -- AUTO_INCREMENT cho bảng `users`
