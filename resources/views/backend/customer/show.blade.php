@@ -84,7 +84,7 @@
                                             {{-- <td>{{$file ->path}}</td> --}}
                                             <td>
                                                <a href="{{$url=route('file/edit',['id'=>$file ->id])}}" title="Edit"><i class="fa fa-edit"></i></a>
-                                                <a href="{{$url=route('file/delete',['id'=>$file ->id,'id_other'=>$file ->id_other])}}" title="Delete" onClick='return confirmAction()'><i class="fa fa-trash"></i></a>
+                                                <a href="{{$url=route('file/delete',['id'=>$file ->id,'id_other'=>$file->id_other])}}" title="Delete" onClick='return confirmAction()'><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
 
@@ -103,9 +103,9 @@
                                     {{--@include('backend.includes.error')--}}
                                 </div>
                                 <div class="card-body">
-                                   <form action="{{ $url=route('file/upload',['id_other'=> $id,'type'=>FILE_TYPE_CUSTOMER,'id'=>$id]) }}" enctype="multipart/form-data" method="POST" >
+                                   <form action="{{ $url=route('file/upload',['id_other'=> $id,'type'=>FILE_TYPE_CUSTOMER]) }}" enctype="multipart/form-data" method="POST" >
                                      {{ csrf_field() }}
-                                     Mô tả : <input type="text" name="detail" > <br/><br/>
+                                     Mô tả : <input type="text" name="note" > <br/><br/>
                                      <input type="file" name="files[]" required="true" multiple="multiple"> <br/><br/>
 
                                      

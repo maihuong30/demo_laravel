@@ -6,52 +6,36 @@ use App\Http\Requests\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Helpers\CommonHelper;
 
 class FileController extends Controller
 {
 
-   public function upload(Request $request, $id, $id_other, $type)
-   {
-
+   public function upload(Request $request, $id_other, $type)
+   {    $request->session()->flash('flash_message','Thêm file thành công.');
+        
         if( $request->hasFile('files')) { 
-            foreach($request->file('files') as $file) {
-                $detail=$request->detail;
-                $fileName = $file->getClientOriginalName();
-
-                if ($type=='2'){
-                    $file->move('file/customer', $fileName);
-                } else if ($type=='1'){
-                    $file ->move('file/project', $fileName);
-                }
-                    
-                $path=$fileName;
-                DB::table('file')
-                    ->insert([
-                        'id_other'=>$id_other,
-                        'type'=>$type,
-                        'path'=>$path,
-                        'status'=>FILE_ACTIVE,
-                        'detail'=>$detail
-                    ]);
+            foreach($request->file('files') as $file) {                           
+                $detail=$request->detail;                
+                CommonHelper::upload($file, $id_other, $type, $detail, true);            
             }
-          header('Location: ' . $_SERVER['HTTP_REFERER']);
-          exit;
-          
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;          
         }
-        else {
-        echo "<script language='javascript'>
-                   alert( 'Khong co file');
-              </script>";
-      }
-      
 
+        else {
+              echo "<script language='javascript'>
+                   alert( 'Khong co file');
+                   </script>";
+        }      
    }
 
-   public function delete(Request $request,$id,$id_other)
+   public function delete(Request $request,$id)
    {    
         $request->session()->flash('flash_message','Xóa file thành công.');
         DB::table('file')->where('id',$id)->update(['status'=>FILE_INACTIVE]);
-        return redirect() -> route('show.customer',['id'=>$id_other]);
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+        exit;
    }
    public function edit($id)
     {
