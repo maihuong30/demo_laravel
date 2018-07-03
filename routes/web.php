@@ -56,6 +56,6 @@ Route::group(array('prefix' => '/', 'middleware' => 'auth'), function () {
   Route::match(['get', 'post'], LINK_BACKEND . '/file/edit/{id}', array('as'=>'file/edit', 'uses'=>'Backend\FileController@edit'));
 
 
-Route::match(['get', 'post'], LINK_BACKEND . '/file/update/{id}/{id_other}', array('as'=>'file/update', 'uses'=>'Backend\FileController@update'));
+  Route::match(['get', 'post'], LINK_BACKEND . '/file/update/{id}/{id_other}', array('as'=>'file/update', 'uses'=>'Backend\FileController@update'));
  
 });

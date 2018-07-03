@@ -3,6 +3,8 @@ namespace App\Helpers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
+use Upload;
+
 /**
 * Auth: quyet@webviet.vn
 * Date: 26/05/2018
@@ -36,25 +38,28 @@ class CommonHelper
         return $filters;
     }
 
-    public static function upload($file, $id_other, $type,$detail, $save = false) {
+    public static function upload($file, $option = [], $type,$detail, $save = false) {
         // Xu ly upload file len server
       // dd($id_other);
-    
+
             $fileNameWithExt = $file->getClientOriginalName();
             $fileName = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
             $extension = $file->getClientOriginalExtension();
             
             $fileName=$fileName.'_'.time().'.'.$extension;
+            $file->file_new_name_body =$fileName;
             // $file->image_resize = true;
             // $file->image_convert = gif;
             // $file->image_x = 100;
             // $file->image_ratio_y = true;
+            //$file->Process('/home/user/files/');
 
-                if ($type==2){
-                    $file->move('file/customer', $fileName);
-                } else if ($type==1){
-                    $file ->move('file/project', $fileName);
-                }
+            if ($type==2){
+                $file->Process('file/customer');
+            } else if ($type==1){
+                $file ->Process('file/project');
+            }
+            
                     
                 // $path=$fileName;
         // Xu ly luu vao DB
@@ -72,40 +77,49 @@ class CommonHelper
                     ]);
         }
     }
-   //  public function upload(Request $request, $id, $id_other, $type)
-   // {
+   public static function uploadFile($file, 
+        $path, 
+        $fileType = "image/*", 
+        $checkSize = true, 
+        $crop = false, 
+        $options = [], 
+        $save = false
+    ) {        
+        $dir = env(PATH_UPLOAD).$path; // Duong dan vat ly tren server       
+        if(!is_dir($dir)){            
+            mkdir($dir,0755);        
+        }        
 
-   //      if( $request->hasFile('files')) { 
-   //          foreach($request->file('files') as $file) {
-   //              $detail=$request->detail;
-   //              $fileName = $file->getClientOriginalName();
+        $nameFile = sha1(rand(1,100000) . microtime(true));        
+        $handle   = new Upload($file);        
+        $handle->file_new_name_body = $nameFile;        
 
-   //              if ($type==FILE_TYPE_CUSTOMER){
-   //                  $file->move('file/customer', $fileName);
-   //              } else if ($type==FILE_TYPE_PROJECT){
-   //                  $file ->move('file/project', $fileName);
-   //              }
-                    
-   //              $path=$fileName;
-   //              DB::table('file')
-   //                  ->insert([
-   //                      'id_other'=>$id_other,
-   //                      'type'=>$type,
-   //                      'path'=>$path,
-   //                      'status'=>FILE_ACTIVE,
-   //                      'detail'=>$detail
-   //                  ]);
-   //          }
-   //        header('Location: ' . $_SERVER['HTTP_REFERER']);
-   //        exit;
-          
-   //      }
-   //      else {
-   //      echo "<script language='javascript'>
-   //                 alert( 'Khong co file');
-   //            </script>";
-   //    }
-      
+        if (!empty($checkSize)) {            
+            $handle->file_max_size = MAX_SIZE_FILE_UPLOAD;        
+        }        
+        if (!empty($fileType)) {            
+            $handle->mime_check = true;        
+        } else {            
+            $handle->mime_check = false;        
+        }    
 
-   // }
+        $handle->allowed = array($fileType);        
+        $handle->Process($dir);        
+        $thumbImg = '';      
+
+        if ($handle->processed) {            
+            $thumbImg = $handle->file_dst_name;         
+        } else {                      
+            return false;        
+        }      
+
+        if (isset($option['oid']) 
+        && !empty($option['oid'])
+        && !empty($save)
+        ) {
+            // Xu ly luu vao DB
+        }
+
+        return $thumbImg;    
+    }
 }
